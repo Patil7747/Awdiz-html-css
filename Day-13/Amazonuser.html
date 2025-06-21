@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amazon Clone - Login & Register</title>
+  <style>
+    /* ===== Default - Mobile First ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f3f3f3;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 15px;
+    }
+
+    .logo {
+      width: 80px;
+      margin-bottom: 20px;
+    }
+
+    .box {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 20px 15px;
+      width: 100%;
+      max-width: 100%;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin: 10px 0 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #888;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #f0c14b;
+      border: 1px solid #a88734;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .create-btn {
+      background-color: #e7e9ec;
+      border: 1px solid #adb1b8;
+      margin-top: 10px;
+    }
+
+    .terms {
+      font-size: 12px;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    .terms a {
+      color: #0066c0;
+      text-decoration: none;
+    }
+
+    .terms a:hover {
+      text-decoration: underline;
+    }
+
+    hr {
+      margin: 20px 0;
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+
+    .new {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .link-btn {
+      display: block;
+      margin-top: 10px;
+      text-align: center;
+      color: #0066c0;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .link-btn:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 12px;
+      text-align: center;
+      color: #555;
+    }
+
+    footer a {
+      margin: 0 10px;
+      color: #0066c0;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    footer p {
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* ===== Laptop View - Screens >= 1024px ===== */
+    @media (min-width: 1024px) {
+      .container {
+        padding: 40px 20px;
+      }
+
+      .logo {
+        width: 100px;
+      }
+
+      .box {
+        padding: 25px;
+        max-width: 350px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      input,
+      button {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Amazon Logo -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" class="logo" />
+
+    <!-- Login Form -->
+    <div id="loginForm" class="box">
+      <h1>Sign in</h1>
+      <form onsubmit="event.preventDefault(); alert('Login submitted');">
+        <label>Email or mobile phone number</label>
+        <input type="text" required />
+        <button type="submit">Continue</button>
+      </form>
+
+      <p class="terms">
+        By continuing, you agree to Amazon's 
+        <a href="#">Conditions of Use</a> and 
+        <a href="#">Privacy Notice</a>.
+      </p>
+
+      <hr />
+      <p class="new">New to Amazon?</p>
+      <button class="create-btn" onclick="toggleForm('register')">Create your Amazon account</button>
+    </div>
+
+    <!-- Register Form -->
+    <div id="registerForm" class="box hidden">
+      <h1>Create account</h1>
+      <form onsubmit="event.preventDefault(); alert('Registration submitted');">
+        <label>Your name</label>
+        <input type="text" required />
+
+        <label>Mobile number or email</label>
+        <input type="text" required />
+
+        <label>Password</label>
+        <input type="password" placeholder="At least 6 characters" required />
+
+        <label>Re-enter password</label>
+        <input type="password" required />
+
+        <button type="submit">Continue</button>
+      </form>
+
+      <p class="terms">
+        By creating an account, you agree to Amazon's 
+        <a href="#">Conditions of Use</a> and 
+        <a href="#">Privacy Notice</a>.
+      </p>
+
+      <hr />
+      <p class="new">Already have an account?</p>
+      <button class="link-btn" onclick="toggleForm('login')">Sign in</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <a href="#">Conditions of Use</a>
+      <a href="#">Privacy Notice</a>
+      <a href="#">Help</a>
+      <p>© 1996–2025, Amazon.com, Inc. or its affiliates</p>
+    </footer>
+  </div>
+
+  <!-- Toggle Script -->
+  <script>
+    function toggleForm(form) {
+      document.getElementById("loginForm").classList.toggle("hidden", form !== "login");
+      document.getElementById("registerForm").classList.toggle("hidden", form !== "register");
+    }
+  </script>
+</body>
+</html>

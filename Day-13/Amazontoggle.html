@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amazon Clone - Role Selection</title>
+  <style>
+    /* Shared Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f3f3f3;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 15px;
+    }
+
+    .logo {
+      width: 100px;
+      margin-bottom: 20px;
+    }
+
+    .dropdown-container {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    select {
+      padding: 8px 12px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      margin-top: 8px;
+    }
+
+    .form-section {
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .box, .container .seller-box {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    h1, h2 {
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin: 10px 0 5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #888;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #f0c14b;
+      border: 1px solid #a88734;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .create-btn, .btn-outline {
+      background-color: #e7e9ec;
+      border: 1px solid #adb1b8;
+      margin-top: 10px;
+    }
+
+    .link-btn {
+      background: none;
+      border: none;
+      color: #0066c0;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      margin-top: 30px;
+      font-size: 12px;
+      text-align: center;
+      color: #555;
+    }
+
+    footer a {
+      margin: 0 10px;
+      color: #0066c0;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        padding: 40px 20px;
+      }
+
+      .form-section {
+        max-width: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon Logo" class="logo" />
+
+    <!-- Role Selection Dropdown -->
+    <div class="dropdown-container">
+      <label for="roleSelect">Select your role:</label>
+      <select id="roleSelect" onchange="switchRole()">
+        <option value="user">User</option>
+        <option value="seller">Seller</option>
+      </select>
+    </div>
+
+    <!-- User Form Section -->
+    <div id="userSection" class="form-section">
+      <div id="loginForm" class="box">
+        <h1>Sign in as User</h1>
+        <form onsubmit="event.preventDefault(); alert('User login submitted');">
+          <label>Email or mobile phone number</label>
+          <input type="text" required />
+          <button type="submit">Continue</button>
+        </form>
+        <button class="create-btn" onclick="toggleForm('register')">Create your Amazon account</button>
+      </div>
+
+      <div id="registerForm" class="box hidden">
+        <h1>Create user account</h1>
+        <form onsubmit="event.preventDefault(); alert('User registration submitted');">
+          <label>Your name</label>
+          <input type="text" required />
+          <label>Email or mobile</label>
+          <input type="text" required />
+          <label>Password</label>
+          <input type="password" required />
+          <label>Re-enter password</label>
+          <input type="password" required />
+          <button type="submit">Continue</button>
+        </form>
+        <button class="link-btn" onclick="toggleForm('login')">Sign in</button>
+      </div>
+    </div>
+
+    <!-- Seller Form Section -->
+    <div id="sellerSection" class="form-section hidden">
+      <div id="sellerLogin" class="seller-box">
+        <h2>Sign in as Seller</h2>
+        <form onsubmit="event.preventDefault(); alert('Seller login submitted');">
+          <label>Email or mobile phone number</label>
+          <input type="text" />
+          <button type="submit">Continue</button>
+        </form>
+        <button class="btn-outline" onclick="toggleForm('sellerRegister')">Create your seller account</button>
+      </div>
+
+      <div id="sellerRegister" class="seller-box hidden">
+        <h2>Create Seller Account</h2>
+        <form onsubmit="event.preventDefault(); alert('Seller registration submitted');">
+          <label>Your name</label>
+          <input type="text" />
+          <label>Mobile number</label>
+          <div style="display: flex; gap: 8px;">
+            <select style="width: 35%;">
+              <option>+91</option>
+              <option>+1</option>
+              <option>+44</option>
+            </select>
+            <input type="tel" style="width: 65%;" placeholder="Mobile number" />
+          </div>
+          <label>Password</label>
+          <input type="password" placeholder="At least 6 characters" />
+          <button type="submit">Verify mobile number</button>
+        </form>
+        <button class="link-btn" onclick="toggleForm('sellerLogin')">Sign in</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <a href="#">Conditions of Use</a>
+      <a href="#">Privacy Notice</a>
+      <a href="#">Help</a>
+      <p>© 1996–2025, Amazon.com, Inc. or its affiliates</p>
+    </footer>
+  </div>
+
+  <script>
+    function switchRole() {
+      const role = document.getElementById('roleSelect').value;
+      document.getElementById('userSection').classList.toggle('hidden', role !== 'user');
+      document.getElementById('sellerSection').classList.toggle('hidden', role !== 'seller');
+    }
+
+    function toggleForm(type) {
+      if (type === 'register') {
+        document.getElementById('loginForm').classList.add('hidden');
+        document.getElementById('registerForm').classList.remove('hidden');
+      } else if (type === 'login') {
+        document.getElementById('registerForm').classList.add('hidden');
+        document.getElementById('loginForm').classList.remove('hidden');
+      } else if (type === 'sellerRegister') {
+        document.getElementById('sellerLogin').classList.add('hidden');
+        document.getElementById('sellerRegister').classList.remove('hidden');
+      } else if (type === 'sellerLogin') {
+        document.getElementById('sellerRegister').classList.add('hidden');
+        document.getElementById('sellerLogin').classList.remove('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
